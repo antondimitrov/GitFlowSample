@@ -1,6 +1,10 @@
 hello
 -feature 1
 -feature 2
+<<<<<<< HEAD
 -Fix 1 after first UAT
 -Fix 2 after first UAT
 -Fix 3 after first UAT
+=======
+-Fix 1 after first UAT
+>>>>>>> a7bc93f... Fix 1 after first UAT
