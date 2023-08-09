@@ -95,7 +95,7 @@ jobs:
     - name: Restore the lates RavenDB
       run: echo "Restore the lates RavenDB"
   start_field_ops_and_wire_it_up:
-    name: start_field_ops_and_wire_it_up
+    name: Start Field Ops
     needs: [restore_raven,restore_sql]
     runs-on: ubuntu-latest
     permissions: write-all
@@ -111,4 +111,55 @@ jobs:
     steps:
     - name: Start Field Ops and wire it up 
       run: echo "Start Field Ops and wite it up"
+  deploy_next_version:
+    name: Deploy next version
+    needs: [restore_raven,restore_sql,start_field_ops_and_wire_it_up]
+    runs-on: ubuntu-latest
+    permissions: write-all
+    strategy:
+      fail-fast: true
+    steps:
+    - name: Deploy 
+      run: echo "Upgrade"
+  switch_traffic:
+    name: Switch traffic to new version
+    needs: [deploy_next_version]
+    runs-on: ubuntu-latest
+    permissions: write-all
+    strategy:
+      fail-fast: true
+    steps:
+    - name: Deploy 
+      run: echo "Upgrade"
+  verify_app_is_running:
+    name: Verify application is running
+    needs: [switch_traffic]
+    runs-on: ubuntu-latest
+    permissions: write-all
+    strategy:
+      fail-fast: true
+    steps:
+    - name: Deploy 
+      run: echo "Upgrade"
+  verify_errors_in_logs:
+    name: Verify error logs
+    needs: [switch_traffic]
+    runs-on: ubuntu-latest
+    permissions: write-all
+    strategy:
+      fail-fast: true
+    steps:
+    - name: Deploy 
+      run: echo "Upgrade"
+  run_customer_tests:
+    name: Customer Tests
+    needs: [switch_traffic]
+    runs-on: ubuntu-latest
+    permissions: write-all
+    strategy:
+      fail-fast: true
+    steps:
+    - name: Deploy 
+      run: echo "Upgrade"
+  
   
