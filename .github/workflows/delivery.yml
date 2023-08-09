@@ -63,7 +63,6 @@ jobs:
   restore_sql:
     name: restore_sql
     needs: [commit_latest_infra]
-    environment: 'test'
     runs-on: ubuntu-latest
     permissions: write-all
     strategy:
@@ -81,7 +80,6 @@ jobs:
   restore_raven:
     name: restore_raven
     needs: commit_latest_infra
-    environment: 'test'
     runs-on: ubuntu-latest
     permissions: write-all
     strategy:
@@ -99,7 +97,6 @@ jobs:
   start_field_ops_and_wire_it_up:
     name: start_field_ops_and_wire_it_up
     needs: [restore_raven,restore_sql]
-    environment: 'test'
     runs-on: ubuntu-latest
     permissions: write-all
     strategy:
@@ -112,6 +109,6 @@ jobs:
         language:
         - dotnet
     steps:
-    - name: Start Field Ops and wite it up 
+    - name: Start Field Ops and wire it up 
       run: echo "Start Field Ops and wite it up"
   
