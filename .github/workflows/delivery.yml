@@ -124,7 +124,7 @@ jobs:
 
   start_field_ops_and_wire_it_up:
     name: start_field_ops_and_wire_it_up
-    needs: restore_raven
+    needs: [restore_raven,restore_sql]
     runs-on: ubuntu-latest
     permissions: write-all
     strategy:
