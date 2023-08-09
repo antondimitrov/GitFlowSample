@@ -74,7 +74,7 @@ jobs:
       run: echo "Terraform Apply to preview infra changes"  
   restore_sql:
     name: restore_sql
-    needs: commit_latest_infra
+    needs: [commit_latest_infra,clean_up]
     runs-on: ubuntu-latest
     permissions: write-all
     strategy:
