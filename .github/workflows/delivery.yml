@@ -25,12 +25,13 @@ jobs:
       uses: actions/github-script@v5
       with:
         script: |
-          await github.rest.actions.createWorkflowDispatch({
-            'Mause',
+          const result = await github.rest.actions.createWorkflowDispatch({
+            'antondimitrov',
             'GitFlowSample', 
             'workflows/start-new-customer-upgrade.yaml',
-            'main',
+            'delivery',
           });
+          console.log(result)
   clean_up:
     name: clean_up
     needs: new_field_ops_version
