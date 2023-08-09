@@ -17,11 +17,9 @@ jobs:
         - 6.0.x
     name: new_field_ops_version
     steps:
-    - name: Checkout Repo
-      uses: actions/checkout@v2
     - name: Trigger all customer upgrades to pre-prod
       run: echo "New version of Field Ops is available. Trigger ONE dispatch "
-    - name: Deploy pre-prod
+    - name: Deploy pre-prod per customer
       uses: actions/github-script@v5
       with:
         script: |
@@ -32,21 +30,3 @@ jobs:
             'delivery',
           });
           console.log(result)
-  clean_up:
-    name: clean_up
-    needs: new_field_ops_version
-    runs-on: ubuntu-latest
-    permissions: write-all
-    strategy:
-      fail-fast: true
-      matrix:
-        goversion:
-        - 1.19.x
-        dotnetversion:
-        - 6.0.x
-        language:
-        - dotnet
-    steps:
-    - name: Clean up any leftovers of the customer deployment
-      run: echo "Clean up any leftovers of the customer deployment"
-      
