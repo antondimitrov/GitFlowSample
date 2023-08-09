@@ -2,7 +2,7 @@ name: Start customer upgrade
 on:
   push:
     branches:
-    - delivery
+    - master
   workflow_dispatch: {}
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
