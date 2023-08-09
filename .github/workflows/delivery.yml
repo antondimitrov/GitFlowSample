@@ -36,3 +36,107 @@ jobs:
     steps:
     - name: Clean up any leftovers of the customer deployment
       run: echo "Clean up any leftovers of the customer deployment"
+  commit_latest_infra:
+    name: commit_latest_infra
+    needs: clean_up
+    runs-on: ubuntu-latest
+    permissions: write-all
+    strategy:
+      fail-fast: true
+      matrix:
+        goversion:
+        - 1.19.x
+        dotnetversion:
+        - 6.0.x
+        language:
+        - dotnet
+    steps:
+    - name: Commit latest infra
+      run: echo "Commit latest infra"
+  preview_infra:
+    name: preview_infra
+    needs: commit_latest_infra
+    runs-on: ubuntu-latest
+    permissions: write-all
+    strategy:
+      fail-fast: true
+      matrix:
+        goversion:
+        - 1.19.x
+        dotnetversion:
+        - 6.0.x
+        language:
+        - dotnet
+    steps:
+    - name: Terraform Plan to preview infra changes
+      run: echo "Terraform Plan to preview infra changes"
+  apply_infra:
+    name: apply_infra
+    needs: preview_infra
+    runs-on: ubuntu-latest
+    permissions: write-all
+    strategy:
+      fail-fast: true
+      matrix:
+        goversion:
+        - 1.19.x
+        dotnetversion:
+        - 6.0.x
+        language:
+        - dotnet
+    steps:
+    - name: Terraform Apply to preview infra changes
+      run: echo "Terraform Apply to preview infra changes"
+  restore_sql:
+    name: restore_sql
+    needs: apply_infra
+    runs-on: ubuntu-latest
+    permissions: write-all
+    strategy:
+      fail-fast: true
+      matrix:
+        goversion:
+        - 1.19.x
+        dotnetversion:
+        - 6.0.x
+        language:
+        - dotnet
+    steps:
+    - name: Restore the lates SQL
+      run: echo "Restore the lates SQL"
+  restore_raven:
+    name: restore_raven
+    needs: apply_infra
+    runs-on: ubuntu-latest
+    permissions: write-all
+    strategy:
+      fail-fast: true
+      matrix:
+        goversion:
+        - 1.19.x
+        dotnetversion:
+        - 6.0.x
+        language:
+        - dotnet
+    steps:
+    - name: Restore the lates RavenDB
+      run: echo "Restore the lates RavenDB"
+
+  start_field_ops_and_wire_it_up:
+    name: start_field_ops_and_wire_it_up
+    needs: restore_raven
+    runs-on: ubuntu-latest
+    permissions: write-all
+    strategy:
+      fail-fast: true
+      matrix:
+        goversion:
+        - 1.19.x
+        dotnetversion:
+        - 6.0.x
+        language:
+        - dotnet
+    steps:
+    - name: Start Field Ops and wite it up 
+      run: echo "Start Field Ops and wite it up"
+  
