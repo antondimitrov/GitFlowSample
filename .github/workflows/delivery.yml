@@ -27,6 +27,6 @@ jobs:
             'antondimitrov',
             'GitFlowSample', 
             'workflows/start-new-customer-upgrade.yaml',
-            'delivery',
+            'delivery'
           });
           console.log(result)
