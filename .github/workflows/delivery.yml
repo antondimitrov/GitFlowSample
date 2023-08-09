@@ -16,7 +16,7 @@ jobs:
     name: new_field_ops_version
     steps:
     - name: Trigger all customer upgrades to pre-prod
-      run: echo "New version of Field Ops is available. Trigger ONE dispatch "
+      run: echo "New version of Field Ops is available. Trigger ONE dispatch  "
   run_system_tests:
     name: Run Integration Tests
     needs: new_field_ops_version
