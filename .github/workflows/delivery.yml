@@ -32,6 +32,9 @@ jobs:
     steps:
     - name: Trigger product specific integration tests
       run: echo "Run in combination with latest OTHER product stable versions"
+    - name: Trigger security checks specific integration tests
+      run: echo "Run in combination with latest OTHER product stable versions"
+
   clean_up:
     name: clean_up
     needs: [new_field_ops_version, run_system_tests]
