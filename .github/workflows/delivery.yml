@@ -34,7 +34,6 @@ jobs:
       run: echo "Run in combination with latest OTHER product stable versions"
     - name: Trigger security checks specific integration tests
       run: echo "Run in combination with latest OTHER product stable versions"
-
   clean_up:
     name: clean_up
     needs: [new_field_ops_version, run_system_tests]
@@ -53,7 +52,7 @@ jobs:
     - name: Clean up any leftovers of the customer deployment
       run: echo "Clean up any leftovers of the customer deployment"
   commit_latest_infra:
-    name: commit_latest_infra
+    name: Restore Latest Infra
     needs: clean_up
     runs-on: ubuntu-latest
     permissions: write-all
@@ -69,43 +68,13 @@ jobs:
     steps:
     - name: Commit latest infra
       run: echo "Commit latest infra"
-  preview_infra:
-    name: preview_infra
-    needs: commit_latest_infra
-    runs-on: ubuntu-latest
-    permissions: write-all
-    strategy:
-      fail-fast: true
-      matrix:
-        goversion:
-        - 1.19.x
-        dotnetversion:
-        - 6.0.x
-        language:
-        - dotnet
-    steps:
     - name: Terraform Plan to preview infra changes
       run: echo "Terraform Plan to preview infra changes"
-  apply_infra:
-    name: apply_infra
-    needs: preview_infra
-    runs-on: ubuntu-latest
-    permissions: write-all
-    strategy:
-      fail-fast: true
-      matrix:
-        goversion:
-        - 1.19.x
-        dotnetversion:
-        - 6.0.x
-        language:
-        - dotnet
-    steps:
     - name: Terraform Apply to preview infra changes
-      run: echo "Terraform Apply to preview infra changes"
+      run: echo "Terraform Apply to preview infra changes"  
   restore_sql:
     name: restore_sql
-    needs: apply_infra
+    needs: commit_latest_infra
     runs-on: ubuntu-latest
     permissions: write-all
     strategy:
@@ -122,7 +91,7 @@ jobs:
       run: echo "Restore the lates SQL"
   restore_raven:
     name: restore_raven
-    needs: apply_infra
+    needs: commit_latest_infra
     runs-on: ubuntu-latest
     permissions: write-all
     strategy:
