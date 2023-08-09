@@ -33,10 +33,10 @@ jobs:
     - name: Trigger product specific integration tests
       run: echo "Run in combination with latest OTHER product stable versions"
     - name: Trigger security checks specific integration tests
-      run: echo "Run in combination with latest OTHER product stable versions"
-  clean_up:
-    name: clean_up
-    needs: [new_field_ops_version, run_system_tests]
+      run: echo "Run in combination with latest OTHER product stable versions"   
+  commit_latest_infra:
+    name: Restore Latest Infra
+    needs: run_system_tests
     runs-on: ubuntu-latest
     permissions: write-all
     strategy:
@@ -51,21 +51,6 @@ jobs:
     steps:
     - name: Clean up any leftovers of the customer deployment
       run: echo "Clean up any leftovers of the customer deployment"
-  commit_latest_infra:
-    name: Restore Latest Infra
-    needs: clean_up
-    runs-on: ubuntu-latest
-    permissions: write-all
-    strategy:
-      fail-fast: true
-      matrix:
-        goversion:
-        - 1.19.x
-        dotnetversion:
-        - 6.0.x
-        language:
-        - dotnet
-    steps:
     - name: Commit latest infra
       run: echo "Commit latest infra"
     - name: Terraform Plan to preview infra changes
@@ -74,7 +59,7 @@ jobs:
       run: echo "Terraform Apply to preview infra changes"  
   restore_sql:
     name: restore_sql
-    needs: [commit_latest_infra,clean_up]
+    needs: [commit_latest_infra]
     runs-on: ubuntu-latest
     permissions: write-all
     strategy:
