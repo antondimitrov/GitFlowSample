@@ -19,6 +19,18 @@ jobs:
     steps:
     - name: Trigger all customer upgrades to pre-prod
       run: echo "New version of Field Ops is available. Trigger ONE dispatch "
+  run_system_tests:
+    name: Run System Integration Tests
+    runs-on: ubuntu-latest
+    permissions: write-all
+    strategy:
+      fail-fast: true
+      matrix:
+        dotnetversion:
+        - 6.0.x
+    steps:
+    - name: Trigger all customer upgrades to pre-prod
+      run: echo "New version of Field Ops is available. Trigger ONE dispatch "
   clean_up:
     name: clean_up
     needs: new_field_ops_version
