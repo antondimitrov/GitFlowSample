@@ -10,6 +10,7 @@ jobs:
   new_field_ops_version:
     runs-on: ubuntu-latest
     permissions: write-all
+    environment: 'dev'
     strategy:
       fail-fast: true
       matrix:
@@ -22,6 +23,7 @@ jobs:
   run_system_tests:
     name: Run Integration Tests
     needs: new_field_ops_version
+    environment: 'dev'
     runs-on: ubuntu-latest
     permissions: write-all
     strategy:
@@ -37,6 +39,7 @@ jobs:
   commit_latest_infra:
     name: Restore Latest Infra
     needs: run_system_tests
+    environment: 'test'
     runs-on: ubuntu-latest
     permissions: write-all
     strategy:
@@ -60,6 +63,7 @@ jobs:
   restore_sql:
     name: restore_sql
     needs: [commit_latest_infra]
+    environment: 'test'
     runs-on: ubuntu-latest
     permissions: write-all
     strategy:
@@ -77,6 +81,7 @@ jobs:
   restore_raven:
     name: restore_raven
     needs: commit_latest_infra
+    environment: 'test'
     runs-on: ubuntu-latest
     permissions: write-all
     strategy:
@@ -95,6 +100,7 @@ jobs:
   start_field_ops_and_wire_it_up:
     name: start_field_ops_and_wire_it_up
     needs: [restore_raven,restore_sql]
+    environment: 'test'
     runs-on: ubuntu-latest
     permissions: write-all
     strategy:
