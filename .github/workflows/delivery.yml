@@ -69,12 +69,7 @@ jobs:
               owner: ${{ github.event.repository.owner }},
               repo: ${{ github.event.repository.name }},
               workflow_id: 'update-version.yml',
-              ref: 'delivery',
-              inputs: {
-                productName: "FieldOperations"
-                customerName: "BlueOil"
-                version: "88.88.88"
-              }
+              ref: 'delivery'
           });
   restore_sql:
     name: Restore SQL Backup
