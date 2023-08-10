@@ -21,7 +21,6 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const { repo, owner } = context.repo;
             const result = await github.rest.pulls.create({
               title: 'Update ${{ inputs.productName }} for ${{ inputs.customerName }} to version ${{ inputs.version }}',
               ${{ github.event.repository.owner }},
