@@ -1,4 +1,4 @@
-run-name: Update product version
+run-name: 'Update ${{ inputs.productName }} for ${{ inputs.customerName }} to version ${{ inputs.version }}'
 on:
   workflow_dispatch:
     inputs:
