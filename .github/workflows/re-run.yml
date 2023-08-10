@@ -1,9 +1,15 @@
-run-name: Resume workflow ${{ inputs.jobId }} 
+run-name: Resume workflow for ${{inputs.CustomerRepo}} with jobId ${{ inputs.jobId }} triggered by PR ${{inputs.PR}}
 on:
   workflow_dispatch:
     inputs:
       jobId:
         description: 'Job Id'
+        required: true
+      PR:
+        description: 'PR'
+        required: true
+      CustomerRepo:
+        description: 'Customer repo'
         required: true
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
