@@ -63,9 +63,9 @@ jobs:
               workflow_id: 'update-version.yml',
               ref: 'delivery',
               inputs: {
-                productName: 'FieldOperations'
-                customerName: 'BlueOil'
-                version: '88.88.88'
+                'productName': 'FieldOperations'
+                'customerName': 'BlueOil'
+                'version': '88.88.88'
               }
           });
     - name: Clean up any leftovers of the customer deployment
