@@ -53,6 +53,16 @@ jobs:
     strategy:
       fail-fast: true
     steps:
+    - name: Update version
+      uses: actions/github-script@v6
+      with:
+        script: |
+          await github.rest.actions.createWorkflowDispatch({
+              owner: 'antondimitrov',
+              repo: 'GitFlowSample',
+              workflow_id: 'update-version.yml',
+              ref: 'delivery'
+          });
     - name: Clean up any leftovers of the customer deployment
       run: echo "Clean up any leftovers of the customer deployment"
     - name: Commit latest infra
@@ -61,16 +71,6 @@ jobs:
       run: echo "Terraform Plan to preview infra changes"
     - name: Terraform Apply to preview infra changes
       run: echo "Terraform Apply to preview infra changes"
-    - name: Update version
-      uses: actions/github-script@v6
-      with:
-        script: |
-          await github.rest.actions.createWorkflowDispatch({
-              owner: 'antondimitrov',
-              repo: ${{ github.event.repository.name }},
-              workflow_id: 'update-version.yml',
-              ref: 'delivery'
-          });
   restore_sql:
     name: Restore SQL Backup
     needs: [commit_latest_infra]
