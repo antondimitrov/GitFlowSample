@@ -1,4 +1,4 @@
-name: Resume workflow
+run-name: Resume workflow ${{ inputs.jobId }} 
 on:
   workflow_dispatch:
     inputs:
@@ -10,20 +10,24 @@ env:
   RE_RUN_JOB_ID: ${{ inputs.jobId }}
 jobs:
   start_new_job:
-    name: ${{ "Resume workflow " + inputs.jobId }} 
+    name: "Starting new job"
     runs-on: ubuntu-latest
     permissions: write-all
     strategy:
       fail-fast: true
-    uses: actions/github-script@v6
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    with:
-      script: |
-        await github.rest.actions.reRunJobForWorkflowRun({
-            owner: 'owner',
-            repo: 'repo',
-            job_id: ${{ inputs.jobId }}
-        });
-
-  
+    steps:
+      - name: Restarting workflow job
+        uses: actions/github-script@v5
+        with:
+          script: |
+            with:
+              script: |
+                await github.rest.actions.reRunJobForWorkflowRun({
+                    owner: 'antondimitrov',
+                    repo: 'GitFlowSample',
+                    job_id: ${{ inputs.jobId }}
+                });
+      
+        
