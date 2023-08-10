@@ -11,6 +11,8 @@ on:
       CustomerRepo:
         description: 'Customer repo'
         required: true
+  pull_request:
+    types: [closed]
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   RE_RUN_JOB_ID: ${{ inputs.jobId }}
@@ -31,7 +33,7 @@ jobs:
             await github.rest.actions.reRunJobForWorkflowRun({
                 owner: 'antondimitrov',
                 repo: 'GitFlowSample',
-                job_id: ${{ inputs.jobId }}
+                job_id: '${{ inputs.jobId }}'
             });
       
         
