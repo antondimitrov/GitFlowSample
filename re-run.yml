@@ -1,0 +1,29 @@
+name: Resume workflow
+on:
+  workflow_dispatch:
+    inputs:
+      jobId:
+        description: 'Job Id'
+        required: true
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  RE_RUN_JOB_ID: ${{ inputs.jobId }}
+jobs:
+  start_new_job:
+    name: ${{ "Resume workflow " + inputs.jobId }} 
+    runs-on: ubuntu-latest
+    permissions: write-all
+    strategy:
+      fail-fast: true
+    uses: actions/github-script@v6
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    with:
+      script: |
+        await github.rest.actions.reRunJobForWorkflowRun({
+            owner: 'owner',
+            repo: 'repo',
+            job_id: ${{ inputs.jobId }}
+        });
+
+  
