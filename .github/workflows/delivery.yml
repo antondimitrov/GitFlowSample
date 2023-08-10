@@ -14,8 +14,12 @@ on:
         - info
         - warning
         - debug
+      runPerfTests:
+        description: 'Run performance tests'
+        type: boolean
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  RUN_PERFORMANCE_TESTS: ${{ inputs.runPerfTests }}
 jobs:
   new_field_ops_version:
     runs-on: ubuntu-latest
@@ -58,7 +62,7 @@ jobs:
     - name: Terraform Apply to preview infra changes
       run: echo "Terraform Apply to preview infra changes"  
   restore_sql:
-    name: restore_sql
+    name: Restore SQL Backup
     needs: [commit_latest_infra]
     runs-on: ubuntu-latest
     permissions: write-all
@@ -68,7 +72,7 @@ jobs:
     - name: Restore the lates SQL
       run: echo "Restore the lates SQL"
   restore_raven:
-    name: restore_raven
+    name: Restore latest RavenDB
     needs: commit_latest_infra
     runs-on: ubuntu-latest
     permissions: write-all
@@ -87,6 +91,18 @@ jobs:
     steps:
     - name: Start Field Ops and wire it up 
       run: echo "Start Field Ops and wite it up"
+  run_performance_tests:
+    name: Run Performance Tests
+    needs: [start_field_ops_and_wire_it_up,]
+    if: ${{inputs.runPerfTests }}
+    environment: 'dev'
+    runs-on: ubuntu-latest
+    permissions: write-all
+    strategy:
+      fail-fast: true
+    steps:
+    - name: Trigger product specific performance tests
+      run: echo "Trigger product specific performance tests"
   deploy_next_version:
     name: Deploy next version
     needs: [restore_raven,restore_sql,start_field_ops_and_wire_it_up]
