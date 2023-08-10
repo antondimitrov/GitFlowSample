@@ -2,8 +2,18 @@ name: Delivery
 on:
   push:
     branches:
-    - delivery
-  workflow_dispatch: {}
+    - delivery 
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
