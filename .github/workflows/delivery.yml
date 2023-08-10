@@ -91,18 +91,6 @@ jobs:
     steps:
     - name: Start Field Ops and wire it up 
       run: echo "Start Field Ops and wite it up"
-  run_performance_tests:
-    name: Run Performance Tests
-    needs: [start_field_ops_and_wire_it_up,]
-    if: ${{inputs.runPerfTests }}
-    environment: 'dev'
-    runs-on: ubuntu-latest
-    permissions: write-all
-    strategy:
-      fail-fast: true
-    steps:
-    - name: Trigger product specific performance tests
-      run: echo "Trigger product specific performance tests"
   deploy_next_version:
     name: Deploy next version
     needs: [restore_raven,restore_sql,start_field_ops_and_wire_it_up]
@@ -113,6 +101,18 @@ jobs:
     steps:
     - name: Deploy 
       run: echo "Upgrade"
+  run_performance_tests:
+    name: Run Performance Tests
+    needs: [deploy_next_version]
+    if: ${{inputs.runPerfTests }}
+    environment: 'dev'
+    runs-on: ubuntu-latest
+    permissions: write-all
+    strategy:
+      fail-fast: true
+    steps:
+    - name: Trigger product specific performance tests
+      run: echo "Trigger product specific performance tests"
   switch_traffic:
     name: Switch traffic to new version
     needs: [deploy_next_version]
