@@ -1,4 +1,4 @@
-run-name: 'Update ${{ inputs.productName }} for ${{ inputs.customerName }} to version ${{ inputs.version }}'
+run-name: 'Create PR to update ${{ inputs.productName }} for ${{ inputs.customerName }} to version ${{ inputs.version }}'
 on:
   workflow_dispatch:
     inputs:
