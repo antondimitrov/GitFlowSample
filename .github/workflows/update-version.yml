@@ -25,4 +25,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          title: 'Update ${{ inputs.productName }} for ${{ inputs.customerName }} to version ${{ inputs.version }}'
+          title: Update ${{ inputs.productName }} for ${{ inputs.customerName }} to version ${{ inputs.version }}
