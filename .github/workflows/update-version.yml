@@ -26,3 +26,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           title: Update ${{ inputs.productName }} for ${{ inputs.customerName }} to version ${{ inputs.version }}
+          commit-message: "Update ${{ inputs.productName }} for ${{ inputs.customerName }} to version ${{ inputs.version }}"
