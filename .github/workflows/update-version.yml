@@ -27,3 +27,4 @@ jobs:
         with:
           title: Update ${{ inputs.productName }} for ${{ inputs.customerName }} to version ${{ inputs.version }}
           commit-message: "Update ${{ inputs.productName }} for ${{ inputs.customerName }} to version ${{ inputs.version }}"
+          branch: "update-${{ inputs.productName }}-${{ inputs.customerName }}-version"
