@@ -68,8 +68,8 @@ jobs:
           await github.rest.actions.createWorkflowDispatch({
               owner: ${{ github.event.repository.owner }},
               repo: ${{ github.event.repository.name }},
-              workflow_id: 'update-version.yml'
-              ref: 'delivery'
+              workflow_id: 'update-version.yml',
+              ref: 'delivery',
               inputs: {
                 productName: "FieldOperations"
                 customerName: "BlueOil"
