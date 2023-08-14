@@ -57,21 +57,6 @@ jobs:
       uses: actions/github-script@v6
       with:
         script: |
-          echo "${{ toJson(github)}}"
-
-          echo "------ job "
-          echo "${{ toJson(job)}}"
-          echo "------"
-
-          echo "------ owner "
-          echo "${{ toJson(github.event.repository.owner)}}"
-          echo "------"
-
-
-          echo "------ runner "
-          echo "${{toJson(runner)}}"
-          echo "------"
-
           const jobsList = await github.rest.actions.listJobsForWorkflowRun({
               owner: ${{ github.event.repository.owner.name}},
               repo: ${{ github.event.repository.name}},
@@ -81,7 +66,7 @@ jobs:
           });
 
           echo "------ jobsList "
-          echo "toJson(jobsList.data)"
+          echo "JSON.stringify(jobsList);"
           echo "------"
 
           await github.rest.actions.createWorkflowDispatch({
