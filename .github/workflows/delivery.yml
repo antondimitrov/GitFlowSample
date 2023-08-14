@@ -58,7 +58,7 @@ jobs:
       with:
         script: |
           const ref = context.payload.pull_request ? context.payload.pull_request.head.sha : context.payload.before;
-          const jobsList = await octokit.rest.actions.listJobsForWorkflowRun({
+          const jobsList = await github.rest.actions.listJobsForWorkflowRun({
             owner: context.repo.owner,
               repo: context.repo.repo,
               run_id: ref,
