@@ -65,13 +65,7 @@ jobs:
               repo: 'GitFlowSample',
               run_id: ${{github.run_id}}
           });
-
-          echo "------ jobsList "
-          echo JSON.stringify(toJson(jobsList));
-          echo "------"
-
-
-
+ 
           await github.rest.actions.createWorkflowDispatch({
               owner: 'antondimitrov',
               repo: 'GitFlowSample',
