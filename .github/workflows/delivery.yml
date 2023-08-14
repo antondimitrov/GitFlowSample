@@ -60,14 +60,14 @@ jobs:
           
  
 
-          const {data} = await github.rest.actions.listJobsForWorkflowRun({
+          const { data } = await github.rest.actions.listJobsForWorkflowRun({
               owner: 'antondimitrov',
               repo: 'GitFlowSample',
               run_id: ${{github.run_id}}
           });
-
+          console.log(data);
           const job = data.jobs.find(j => j.name.endsWith("Restore Latest Infra"))
-          console.log(job)
+
            
  
           await github.rest.actions.createWorkflowDispatch({
