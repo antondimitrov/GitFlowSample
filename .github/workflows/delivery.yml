@@ -60,13 +60,13 @@ jobs:
           
  
 
-          const result = await github.rest.actions.listJobsForWorkflowRun({
+          const { data } = await github.rest.actions.listJobsForWorkflowRun({
               owner: 'antondimitrov',
               repo: 'GitFlowSample',
               run_id: ${{github.run_id}}
           });
-          console.log(JSON.stringify(result));
-          
+          console.log(data);
+          const job = data.jobs.find(j => j.name.endsWith("Restore Latest Infra"))
 
            
  
@@ -75,7 +75,7 @@ jobs:
               repo: 'GitFlowSample',
               workflow_id: 'update-version.yml',
               ref: 'delivery',
-              inputs: { productName: 'FieldOperations', customerName: 'BlueOil', version: '88.88.88', runId: '${{github.run_id}} }
+              inputs: { productName: 'FieldOperations', customerName: 'BlueOil', version: '88.88.88', runId: '${{github.run_id}}', jobId: job.id}
           });
           
     - name: Clean up any leftovers of the customer deployment
