@@ -63,9 +63,13 @@ jobs:
           const { jobsList } = await github.rest.actions.listJobsForWorkflowRun({
               owner: 'antondimitrov',
               repo: 'GitFlowSample',
-              run_id: 5858010089
+              run_id: ${{github.run_id}}
           });
- 
+
+          echo "------ jobsList "
+          echo JSON.stringify(toJson(jobsList));
+          echo "------"
+
 
 
           await github.rest.actions.createWorkflowDispatch({
