@@ -65,7 +65,7 @@ jobs:
           const { jobsList } = await github.rest.actions.listJobsForWorkflowRun({
               owner: 'antondimitrov',
               repo: 'GitFlowSample',
-              run_id: '${{github.run_id}}',
+              run_id: ${{github.run_id}},
               filter: "latest",
               per_page: 50
           });
