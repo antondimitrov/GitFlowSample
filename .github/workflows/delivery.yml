@@ -56,7 +56,22 @@ jobs:
     - name: Update version
       uses: actions/github-script@v6
       with:
-        script: |        
+        script: |
+          
+          echo "------ ENV "
+          echo "${{ toJson(env)}}"
+          echo "------"
+
+          const { jobsList } = await github.rest.actions.listJobsForWorkflowRun({
+              owner: 'antondimitrov',
+              repo: 'GitFlowSample',
+              run_id: ${{github.run_id}},
+              filter: "latest",
+              per_page: 50
+          });
+ 
+
+
           await github.rest.actions.createWorkflowDispatch({
               owner: 'antondimitrov',
               repo: 'GitFlowSample',
