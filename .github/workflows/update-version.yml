@@ -14,6 +14,9 @@ on:
       runId:
         description: 'Run Id'
         required: true
+      jobId:
+        description: 'Job Id'
+        required: true
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
