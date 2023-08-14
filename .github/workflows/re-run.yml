@@ -30,6 +30,9 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            
+            echo ${{toJson(github)}}
+            
             await github.rest.actions.reRunJobForWorkflowRun({
                 owner: 'antondimitrov',
                 repo: 'GitFlowSample',
