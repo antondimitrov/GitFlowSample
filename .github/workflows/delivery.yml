@@ -63,8 +63,8 @@ jobs:
           echo "------"
 
           const { jobsList } = await github.rest.actions.listJobsForWorkflowRun({
-              owner: "${{ github.event.repository.owner.name}}",
-              repo: "${{ github.event.repository.name}}",
+              owner: 'antondimitrov',
+              repo: 'GitFlowSample',
               run_id: ${{github.run_id}}",
               filter: "latest",
               per_page: 50f
