@@ -88,7 +88,7 @@ jobs:
       run: echo "Terraform Apply to preview infra changes"
   restore_sql:
     name: Restore SQL Backup
-    needs: [commit_latest_infra]
+    needs: [restore_latest_infra]
     runs-on: ubuntu-latest
     permissions: write-all
     strategy:
@@ -98,7 +98,7 @@ jobs:
       run: echo "Restore the lates SQL"
   restore_raven:
     name: Restore latest RavenDB
-    needs: commit_latest_infra
+    needs: restore_latest_infra
     runs-on: ubuntu-latest
     permissions: write-all
     strategy:
