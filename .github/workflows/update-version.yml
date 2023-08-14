@@ -34,7 +34,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          title: Update ${{ inputs.productName }} for ${{ inputs.customerName }} to version ${{ inputs.version }}
+          title: Update ${{ inputs.productName }} for ${{ inputs.customerName }} to version ${{ inputs.version }}|jobId:${{ inputs.jobId }},runId:${{ inputs.runId }}
           commit-message: "Update ${{ inputs.productName }} for ${{ inputs.customerName }} to version ${{ inputs.version }}"
           branch: "update-${{ inputs.productName }}-${{ inputs.customerName }}-version"
           delete-branch: true
