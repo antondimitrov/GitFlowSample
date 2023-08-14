@@ -41,6 +41,3 @@ jobs:
               action_id: "${{github.action}}"
             }
             ```
-            ```
-              ${{ toJson(github) }}
-            ```
