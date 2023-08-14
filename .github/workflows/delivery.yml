@@ -66,7 +66,7 @@ jobs:
           });
 
           echo "------ jobsList "
-          echo "JSON.stringify(jobsList);"
+          echo JSON.stringify(jobsList);
           echo "------"
 
           await github.rest.actions.createWorkflowDispatch({
