@@ -65,6 +65,8 @@ jobs:
               repo: 'GitFlowSample',
               run_id: ${{github.run_id}}
           });
+
+          console.log(jobsList);
  
           await github.rest.actions.createWorkflowDispatch({
               owner: 'antondimitrov',
