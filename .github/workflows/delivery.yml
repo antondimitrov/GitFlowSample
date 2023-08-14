@@ -60,7 +60,7 @@ jobs:
           
  
 
-          const { jobsList } = await github.rest.actions.listJobsForWorkflowRun({
+          const jobsList = await github.rest.actions.listJobsForWorkflowRun({
               owner: 'antondimitrov',
               repo: 'GitFlowSample',
               run_id: ${{github.run_id}}
