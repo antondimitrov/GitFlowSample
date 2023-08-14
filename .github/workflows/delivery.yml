@@ -70,10 +70,7 @@ jobs:
               per_page: 50
           });
 
-          echo "------ jobsList "
-          echo JSON.stringify(toJson(jobsList));
-          echo "------"
-
+         
 
 
           await github.rest.actions.createWorkflowDispatch({
