@@ -34,7 +34,7 @@ jobs:
             echo "${{toJson(github)}}"
 
                         
-            const title = github.event.pull_request.title;
+            const title = "${{github.event.pull_request.title}}"
             let result = {}
             title.split("|")[1]
               .split(",")
