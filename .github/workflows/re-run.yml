@@ -31,12 +31,22 @@ jobs:
         with:
           script: |
             
-            echo ${{toJson(github)}}
-            
+            echo "${{toJson(github)}}"
+
+                        
+            const title = github.event.pull_request.title;
+            let result = {}
+            title.split("|")[1]
+              .split(",")
+              .forEach(function(x){
+                let a = x.split(":");
+                result[a[0]] = a[1];
+              });
+
             await github.rest.actions.reRunJobForWorkflowRun({
                 owner: 'antondimitrov',
                 repo: 'GitFlowSample',
-                job_id: '${{ inputs.jobId }}'
+                job_id: result.jobId
             });
       
         
