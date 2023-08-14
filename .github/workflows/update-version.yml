@@ -39,5 +39,6 @@ jobs:
             {
               repo: "${{github.event.repository.name}}"
               action_id: "${{github.action}}"
+              inputs: ${{toJson(inputs)}}
             }
             ```
