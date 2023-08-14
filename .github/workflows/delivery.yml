@@ -44,7 +44,7 @@ jobs:
       run: echo "Run in combination with latest OTHER product stable versions"
     - name: Trigger security checks specific integration tests
       run: echo "Run in combination with latest OTHER product stable versions "   
-  commit_latest_infra:
+  restore_latest_infra:
     name: Restore Latest Infra
     needs: run_system_tests
     environment: 'test'
@@ -60,21 +60,22 @@ jobs:
           
  
 
-          const jobsList = await github.rest.actions.listJobsForWorkflowRun({
+          const {data} = await github.rest.actions.listJobsForWorkflowRun({
               owner: 'antondimitrov',
               repo: 'GitFlowSample',
               run_id: ${{github.run_id}}
           });
 
-          console.log(JSON.stringify(jobsList.data.jobs));
-          echo "${{toJson(github)}}";
+          const job = data.jobs.find(j => j.name.endsWith("Restore Latest Infra"))
+          console.log(job)
+           
  
           await github.rest.actions.createWorkflowDispatch({
               owner: 'antondimitrov',
               repo: 'GitFlowSample',
               workflow_id: 'update-version.yml',
               ref: 'delivery',
-              inputs: { productName: 'FieldOperations', customerName: 'BlueOil', version: '88.88.88', runId: '${{github.run_id}}' }
+              inputs: { productName: 'FieldOperations', customerName: 'BlueOil', version: '88.88.88', runId: '${{github.run_id}}' jobId: job.id}
           });
           
     - name: Clean up any leftovers of the customer deployment
