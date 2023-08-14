@@ -63,12 +63,17 @@ jobs:
           echo "${{ toJson(job)}}"
           echo "------"
 
-          echo "------ job "
-          echo "${{ github.event.repository.owner}}"
+          echo "------ owner "
+          echo "${{ toJson(github.event.repository.owner)}}"
+          echo "------"
+
+
+          echo "------ runner "
+          echo "${{toJson(runner)}}"
           echo "------"
 
           const jobsList = await github.rest.actions.listJobsForWorkflowRun({
-              owner: ${{ github.event.repository.owner.name}},
+              owner: ${{ github.event.repository.owner.login}},
               repo: ${{ github.event.repository.name}},
               run_id: ${{github.run_id}},
               filter: 'latest',
