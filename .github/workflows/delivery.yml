@@ -57,17 +57,24 @@ jobs:
       uses: actions/github-script@v6
       with:
         script: |
-          const jobsList = await github.rest.actions.listJobsForWorkflowRun({
-              owner: ${{ github.event.repository.owner.name}},
-              repo: ${{ github.event.repository.name}},
-              run_id: ${{github.run_id}},
-              filter: 'latest',
+          
+          echo "------ ENV "
+          echo "${{ env}}"
+          echo "------"
+          
+          const { jobsList } = await github.rest.actions.listJobsForWorkflowRun({
+              owner: "${{ github.event.repository.owner.name}}",
+              repo: "${{ github.event.repository.name}}",
+              run_id: ${{github.run_id}}",
+              filter: "latest",
               per_page: 50
           });
 
           echo "------ jobsList "
           echo JSON.stringify(jobsList);
           echo "------"
+
+
 
           await github.rest.actions.createWorkflowDispatch({
               owner: 'antondimitrov',
