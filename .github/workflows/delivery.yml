@@ -60,14 +60,14 @@ jobs:
           echo "${{ toJson(github)}}"
 
           const jobsList = await github.rest.actions.listJobsForWorkflowRun({
-            owner: context.repo.owner,
-              repo: context.repo.repo,
+              owner: ${{ github.event.repository.owner}},
+              repo: ${{ github.event.repository.name}},
               run_id: ${{github.run_id}},
               filter: 'latest',
               per_page: 50
           });
 
-          echo jobsList
+          echo toJson(jobsList)
 
           await github.rest.actions.createWorkflowDispatch({
               owner: 'antondimitrov',
