@@ -57,12 +57,20 @@ jobs:
       uses: actions/github-script@v6
       with:
         script: |
+          const ref = context.payload.pull_request ? context.payload.pull_request.head.sha : context.payload.before;
+          const jobsList = await octokit.rest.actions.listJobsForWorkflowRun({
+            owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: ref,
+              filter: 'latest',
+              per_page: 50
+          });
           await github.rest.actions.createWorkflowDispatch({
               owner: 'antondimitrov',
               repo: 'GitFlowSample',
               workflow_id: 'update-version.yml',
               ref: 'delivery',
-              inputs: { productName: 'FieldOperations', customerName: 'BlueOil', version: '88.88.88'}
+              inputs: { productName: 'FieldOperations', customerName: 'BlueOil', version: '88.88.88', jobs: jobsList}
           });
     - name: Clean up any leftovers of the customer deployment
       run: echo "Clean up any leftovers of the customer deployment"
