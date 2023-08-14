@@ -11,6 +11,9 @@ on:
       version:
         description: 'Version'
         required: true
+      runId:
+        description: 'Run Id'
+        required: true
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:

@@ -56,16 +56,15 @@ jobs:
     - name: Update version
       uses: actions/github-script@v6
       with:
-        script: |
-          
-    
+        script: |        
           await github.rest.actions.createWorkflowDispatch({
               owner: 'antondimitrov',
               repo: 'GitFlowSample',
               workflow_id: 'update-version.yml',
               ref: 'delivery',
-              inputs: { productName: 'FieldOperations', customerName: 'BlueOil', version: '88.88.88', run: {run_id: ${{github.run_id}}}}
+              inputs: { productName: 'FieldOperations', customerName: 'BlueOil', version: '88.88.88', runId: '${{github.run_id}}' }
           });
+          
     - name: Clean up any leftovers of the customer deployment
       run: echo "Clean up any leftovers of the customer deployment"
     - name: Commit latest infra
