@@ -59,6 +59,14 @@ jobs:
         script: |
           echo "${{ toJson(github)}}"
 
+          echo "------ job "
+          echo "${{ toJson(job)}}"
+          echo "------"
+
+          echo "------ job "
+          echo "${{ github.event.repository.owner}}"
+          echo "------"
+
           const jobsList = await github.rest.actions.listJobsForWorkflowRun({
               owner: ${{ github.event.repository.owner}},
               repo: ${{ github.event.repository.name}},
