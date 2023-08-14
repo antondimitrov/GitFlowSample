@@ -67,7 +67,7 @@ jobs:
               repo: 'GitFlowSample',
               run_id: '${{github.run_id}}"',
               filter: "latest",
-              per_page: 50f
+              per_page: 50
           });
 
           echo "------ jobsList "
