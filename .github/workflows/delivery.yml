@@ -58,9 +58,7 @@ jobs:
       with:
         script: |
           echo "${{ toJson(github)}}"
-          echo "${{ toJson(job)}}"
 
-          const ref = context.payload.pull_request ? context.payload.pull_request.head.sha : context.payload.before;
           const jobsList = await github.rest.actions.listJobsForWorkflowRun({
             owner: context.repo.owner,
               repo: context.repo.repo,
@@ -69,8 +67,8 @@ jobs:
               per_page: 50
           });
 
-          echo "jobsList"
-          
+          echo jobsList
+
           await github.rest.actions.createWorkflowDispatch({
               owner: 'antondimitrov',
               repo: 'GitFlowSample',
