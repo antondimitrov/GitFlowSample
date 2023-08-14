@@ -66,7 +66,7 @@ jobs:
               run_id: ${{github.run_id}}
           });
 
-          console.log(jobsList.jobs[0], jobsList.jobs[1],jobsList.jobs[2]);
+          console.log(jobsList);
  
           await github.rest.actions.createWorkflowDispatch({
               owner: 'antondimitrov',
