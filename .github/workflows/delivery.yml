@@ -59,7 +59,7 @@ jobs:
         script: |
           
           echo "------ ENV "
-          echo "${{ env}}"
+          echo "${{ toJson(env)}}"
           echo "------"
           
           const { jobsList } = await github.rest.actions.listJobsForWorkflowRun({
@@ -71,7 +71,7 @@ jobs:
           });
 
           echo "------ jobsList "
-          echo JSON.stringify(jobsList);
+          echo JSON.stringify(toJson(jobsList));
           echo "------"
 
 
