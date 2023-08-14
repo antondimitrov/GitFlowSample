@@ -1,7 +1,7 @@
 {
-  "customerName" :"GreenOil",
-  "version" : {
-    "fieldOps" : "10.0.0",
-    "authService" : "2.0.0"
+  "customerName": "GreenOil",
+  "version": {
+    "fieldOps": "99.99.99",
+    "authService": "2.0.0"
   }
 }
