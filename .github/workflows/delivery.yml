@@ -58,6 +58,8 @@ jobs:
       with:
         script: |
           
+          // Checks that validate if the action was performed already ? 
+
           const { data } = await github.rest.actions.listJobsForWorkflowRun({
               owner: 'antondimitrov',
               repo: 'GitFlowSample',
@@ -74,6 +76,8 @@ jobs:
               ref: 'delivery',
               inputs: { productName: 'FieldOperations', customerName: 'BlueOil', version: '88.88.88', runId: '${{github.run_id}}', jobId: `${jobId}`}
           });
+
+          exit 1;
           
     - name: Clean up any leftovers of the customer deployment
       run: echo "Clean up any leftovers of the customer deployment"
