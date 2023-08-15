@@ -33,7 +33,6 @@ jobs:
             
             echo "${{toJson(github)}}"
 
-                        
             const title = "${{github.event.pull_request.title}}"
             let result = {}
             title.split("|")[1]
@@ -42,14 +41,13 @@ jobs:
                 let a = x.split(":");
                 result[a[0]] = a[1];
               });
-      - name: Restarting workflow job
-        uses: actions/github-script@v6
-        with:
-          script: |
-            await github.rest.actions.reRunJobForWorkflowRun({
+
+
+              await github.rest.actions.reRunJobForWorkflowRun({
                 owner: 'antondimitrov',
                 repo: 'GitFlowSample',
                 job_id: result.jobId
             });
+            
       
         
