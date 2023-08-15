@@ -77,7 +77,7 @@ jobs:
               inputs: { productName: 'FieldOperations', customerName: 'BlueOil', version: '88.88.88', runId: '${{github.run_id}}', jobId: `${jobId}`}
           });
 
-          exit 1;
+          exit 78;
           
     - name: Clean up any leftovers of the customer deployment
       run: echo "Clean up any leftovers of the customer deployment"
