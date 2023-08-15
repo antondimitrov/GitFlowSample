@@ -25,14 +25,12 @@ jobs:
       fail-fast: true
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-   
+
     steps:
       - name: Extract job metadata
-        id: extract_metadata
         uses: actions/github-script@v6
         with:
-          script: |
-            
+          script: |   
             echo "${{toJson(github)}}"     
             const title = "${{github.event.pull_request.title}}"
             let result = {}
