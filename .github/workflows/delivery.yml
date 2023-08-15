@@ -77,8 +77,13 @@ jobs:
               inputs: { productName: 'FieldOperations', customerName: 'BlueOil', version: '88.88.88', runId: '${{github.run_id}}', jobId: `${jobId}`}
           });
 
-          exit 78;
+    - name: Fail
+      uses: actions/github-script@v6
+      with:
+        script: |
           
+          exit 1;
+        
     - name: Clean up any leftovers of the customer deployment
       run: echo "Clean up any leftovers of the customer deployment"
     - name: Commit latest infra
