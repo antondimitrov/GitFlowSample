@@ -43,8 +43,6 @@ jobs:
                 result[a[0]] = a[1];
               });
 
-            echo JSON.stringify(result)
-
       - name: Restarting workflow job
         uses: actions/github-script@v6
         with:
