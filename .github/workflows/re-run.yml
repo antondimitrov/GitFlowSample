@@ -42,7 +42,7 @@ jobs:
                 let a = x.split(":");
                 result[a[0]] = a[1];
               });
-            echo `callback=${result}` >> "$GITHUB_OUTPUT"
+            echo ("callback=" + JSON.stringify(result)) >> "$GITHUB_OUTPUT"
 
       - name: Restarting workflow job
         uses: actions/github-script@v6
