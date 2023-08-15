@@ -28,7 +28,7 @@ jobs:
           persist-credentials: false
       - name: Update ${{ inputs.productName }} for ${{ inputs.customerName }} to version ${{ inputs.version }} 
         run: |
-          .\inputs.ps1 ${{ inputs.version }}"
+          .\inputs.ps1 "${{ inputs.version }}"
         shell: pwsh
       - uses: peter-evans/create-pull-request@v5
         env:
