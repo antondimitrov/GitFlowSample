@@ -52,7 +52,7 @@ jobs:
             await github.rest.actions.reRunJobForWorkflowRun({
                 owner: 'antondimitrov',
                 repo: 'GitFlowSample',
-                job_id: ${{ steps.extract_metadata.outputs.callback.jobId }}
+                job_id: '${{ steps.extract_metadata.outputs.callback.jobId }}'
             });
       
         
