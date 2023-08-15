@@ -5,15 +5,9 @@ on:
     - delivery 
   workflow_dispatch:
     inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning'
-        type: choice
-        options:
-        - info
-        - warning
-        - debug
+      confirmation:
+        description: 'Confirm job'
+        required: false
       runPerfTests:
         description: 'Run performance tests'
         type: boolean
@@ -55,6 +49,7 @@ jobs:
     steps:
     - name: Update version
       uses: actions/github-script@v6
+      if: inputs.confirmation != 'restore_latest_infra'
       with:
         script: |
           
@@ -74,16 +69,15 @@ jobs:
               repo: 'GitFlowSample',
               workflow_id: 'update-version.yml',
               ref: 'delivery',
-              inputs: { productName: 'FieldOperations', customerName: 'BlueOil', version: '88.88.88', runId: '${{github.run_id}}', jobId: `${jobId}`}
+              inputs: { productName: 'MyCoolProduct', customerName: 'BlueOil', version: '10.2.1', runId: '${{github.run_id}}', jobId: `${jobId}`}
           });
 
-    - name: Fail
+    - name: Pending version update approval
       uses: actions/github-script@v6
+      
       with:
         script: |
-          
           exit 1;
-        
     - name: Clean up any leftovers of the customer deployment
       run: echo "Clean up any leftovers of the customer deployment"
     - name: Commit latest infra

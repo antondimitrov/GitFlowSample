@@ -25,13 +25,15 @@ jobs:
       fail-fast: true
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+   
     steps:
       - name: Extract job metadata
+        id: extract_metadata
         uses: actions/github-script@v6
         with:
           script: |
             
-            echo "${{toJson(github)}}"         
+            echo "${{toJson(github)}}"     
             const title = "${{github.event.pull_request.title}}"
             let result = {}
             title.split("|")[1]
@@ -40,6 +42,7 @@ jobs:
                 let a = x.split(":");
                 result[a[0]] = a[1];
               });
+            echo `callback=${result}` >> "$GITHUB_OUTPUT"
 
       - name: Restarting workflow job
         uses: actions/github-script@v6
@@ -49,7 +52,7 @@ jobs:
             await github.rest.actions.reRunJobForWorkflowRun({
                 owner: 'antondimitrov',
                 repo: 'GitFlowSample',
-                job_id: result.jobId
+                job_id: ${{ steps.extract_metadata.outputs.callback.jobId }}
             });
       
         
