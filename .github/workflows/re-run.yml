@@ -34,16 +34,17 @@ jobs:
             echo "${{toJson(github)}}"
 
             const title = "${{github.event.pull_request.title}}"
-            let result = {}
+            let result = {};
             title.split("|")[1]
               .split(",")
               .forEach(function(x){
                 let a = x.split(":");
                 result[a[0]] = a[1];
               });
+            const a = JSON.stringify(result);
+            console.log(a);
+            echo a;
 
-            console.log(JSON.stringify(result));
-            
             await github.rest.actions.reRunJobForWorkflowRun({
               owner: 'antondimitrov',
               repo: 'GitFlowSample',
