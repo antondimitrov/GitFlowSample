@@ -39,9 +39,7 @@ jobs:
                 result[a[0]] = a[1];
               });
             
-            const a = JSON.stringify(result);
-            console.log(a);
-            echo a;
+            
  
             
       
