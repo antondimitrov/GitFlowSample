@@ -45,11 +45,6 @@ jobs:
             console.log(a);
             echo a;
 
-            await github.rest.actions.reRunJobForWorkflowRun({
-              owner: 'antondimitrov',
-              repo: 'GitFlowSample',
-              job_id: result.jobId
-            });
             
       
         
