@@ -33,7 +33,11 @@ jobs:
             const title = "${{github.event.pull_request.title}}";
             let result = {};
             title.split("|")[1]
-              .split(",");
-              
+              .split(",")
+              .forEach(function(x){
+                let a = x.split(":");
+                result[a[0]] = a[1];
+              });
+             
       
         
