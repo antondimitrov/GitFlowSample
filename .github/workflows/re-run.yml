@@ -40,6 +40,12 @@ jobs:
               });
             
             console.log(result);
- 
+
+            await github.rest.actions.reRunJobForWorkflowRun({
+              owner: 'antondimitrov',
+              repo: 'GitFlowSample',
+              job_id: result.jobId
+            });
+            
       
         
