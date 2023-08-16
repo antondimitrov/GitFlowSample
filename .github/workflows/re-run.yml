@@ -39,7 +39,7 @@ jobs:
                 result[a[0]] = a[1];
               });
             
-            echo result;
-
+            echo `${result}`;
+ 
       
         
