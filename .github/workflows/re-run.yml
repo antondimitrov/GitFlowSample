@@ -42,11 +42,12 @@ jobs:
                 result[a[0]] = a[1];
               });
 
-
-              await github.rest.actions.reRunJobForWorkflowRun({
-                owner: 'antondimitrov',
-                repo: 'GitFlowSample',
-                job_id: result.jobId
+            console.log(JSON.stringify(result));
+            
+            await github.rest.actions.reRunJobForWorkflowRun({
+              owner: 'antondimitrov',
+              repo: 'GitFlowSample',
+              job_id: result.jobId
             });
             
       
