@@ -31,9 +31,9 @@ jobs:
         with:
           script: |
             
-            echo "${{toJson(github)}}"
+         
 
-            const title = "${{github.event.pull_request.title}}"
+            const title = "${{github.event.pull_request.title}}";
             let result = {};
             title.split("|")[1]
               .split(",")
@@ -45,6 +45,11 @@ jobs:
             console.log(a);
             echo a;
 
+            await github.rest.actions.reRunJobForWorkflowRun({
+              owner: 'antondimitrov',
+              repo: 'GitFlowSample',
+              job_id: result.jobId
+            });
             
       
         
