@@ -56,6 +56,10 @@ jobs:
           // Checks that validate if the action was performed already ? 
           console.log(${{toJson(github)}});
 
+          console.log(${{toJson(job)}});
+
+          console.log(${{toJson(steps)}});
+
           const { data } = await github.rest.actions.listJobsForWorkflowRun({
               owner: 'antondimitrov',
               repo: 'GitFlowSample',

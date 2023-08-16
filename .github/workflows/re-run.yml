@@ -1,4 +1,4 @@
-run-name: Resume workflow for ${{inputs.CustomerRepo}} with jobId ${{ inputs.jobId }} triggered by PR ${{inputs.PR}} ${{github.event.pull_request.title}}
+run-name: Resume workflow after completing ${{github.event.pull_request.title}}
 on:
   workflow_dispatch:
     inputs:
