@@ -54,6 +54,7 @@ jobs:
         script: |
           
           // Checks that validate if the action was performed already ? 
+          console.log("${{toJson(github)}}");
 
           const { data } = await github.rest.actions.listJobsForWorkflowRun({
               owner: 'antondimitrov',
@@ -74,7 +75,7 @@ jobs:
 
     - name: Pending version update approval
       uses: actions/github-script@v6
-      
+
       with:
         script: |
           exit 1;

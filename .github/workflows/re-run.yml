@@ -1,4 +1,4 @@
-run-name: Resume workflow for ${{inputs.CustomerRepo}} with jobId ${{ inputs.jobId }} triggered by PR ${{inputs.PR}}
+run-name: Resume workflow for ${{inputs.CustomerRepo}} with jobId ${{ inputs.jobId }} triggered by PR ${{inputs.PR}} ${{github.event.pull_request.title}}
 on:
   workflow_dispatch:
     inputs:
@@ -38,8 +38,6 @@ jobs:
                 let a = x.split(":");
                 result[a[0]] = a[1];
               });
-            
-            console.log(result);
 
             await github.rest.actions.reRunJobForWorkflowRun({
               owner: 'antondimitrov',
