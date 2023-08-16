@@ -47,6 +47,15 @@ jobs:
     strategy:
       fail-fast: true
     steps:
+    - uses: trstringer/manual-approval@v1
+      with:
+        approvers: antondimitrov
+        minimum-approvals: 1
+        issue-title: "Issue to approve new version update"
+        issue-body: "Please approve or deny the deployment of version v1.3.5."
+        exclude-workflow-initiator-as-approver: false
+        additional-approved-words: ''
+        additional-denied-words: ''
     - name: Update version
       uses: actions/github-script@v6
       if: inputs.confirmation != 'restore_latest_infra'
