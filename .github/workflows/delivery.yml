@@ -49,6 +49,7 @@ jobs:
     steps:
     - uses: trstringer/manual-approval@v1
       with:
+        secret: ${{ secrets.GITHUB_TOKEN }}
         approvers: antondimitrov
         minimum-approvals: 1
         issue-title: "Issue to approve new version update"
